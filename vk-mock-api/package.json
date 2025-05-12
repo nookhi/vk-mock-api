@@ -1,0 +1,10 @@
+{
+  "name": "vk-mock-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "bash start.sh"
+  },
+  "dependencies": {
+    "@stoplight/prism-cli": "^5.4.0"
+  }
+}

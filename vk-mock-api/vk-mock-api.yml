@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: VK Mock API
+  description: Моковая реализация части VK API
+  version: 1.0.0
+
+paths:
+  /messages.send:
+    post:
+      summary: Отправка сообщения
+      operationId: send_message
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                peer_id:
+                  type: integer
+                  example: 123456789
+                  description: Идентификатор собеседника
+                message:
+                  type: string
+                  example: "Привет!"
+                  description: Текст отправляемого сообщения
+                random_id:
+                  type: string
+                  example: "abc123"
+                  description: Уникальный идентификатор сообщения
+              required:
+                - peer_id
+                - random_id
+      responses:
+        '200':
+          description: Успешная отправка
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: integer
+                    example: 5
+                    description: Идентификатор отправленного сообщения
+        '400':
+          description: Ошибка запроса
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Неавторизован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
