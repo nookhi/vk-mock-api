@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 
 paths:
-  /messages.send:
+  /method/messages.send:
     post:
       summary: Отправка сообщения
       operationId: send_message
@@ -63,7 +63,84 @@ paths:
                     type: string
       security:
         - bearerAuth: []
+  /method/messages.getHistory:
+    get:
+      summary: Получить историю сообщений с пользователя
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "123456789"
+          description: Идентификатор собеседника
 
+        - name: start_message_id
+          in: path
+          required: false
+          schema:
+            type: integer
+          example: 21050
+          description: Начальный ID сообщения для выборки
+
+      responses:
+        '200':
+          description: Успешный ответ с историей сообщений
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            date:
+                              type: integer
+                            peer_id:
+                              type: integer
+                            from_id:
+                              type: integer
+                            message:
+                              type: string
+                            out:
+                              type: integer
+                            attachments:
+                              type: array
+                              items:
+                                type: object
+                              nullable: true
+                            text:
+                              type: string
+                              nullable: true
+              example:
+                response:
+                  count: 2
+                  items:
+                    - id: 21053
+                      date: 1669900000
+                      peer_id: 123456788
+                      from_id: 123456789
+                      message: "Здравствуйте! Мы получили ваше резюме."
+                      out: 1
+                      attachments: []
+                    - id: 21054
+                      date: 1670000000
+                      peer_id: 123456789
+                      from_id: 123456788
+                      text: "Здравствуйте, подскажите статус моего резюме?"
+                      out: 0
+                      attachments: []
+      security:
+        - bearerAuth: []
 components:
   securitySchemes:
     bearerAuth:
