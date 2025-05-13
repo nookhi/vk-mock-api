@@ -136,6 +136,51 @@ paths:
                       attachments: []
       security:
         - bearerAuth: []
+  /method/users.get:
+    get:
+      summary: Получить информацию о пользователе по его ID или никнейму
+      parameters:
+        - name: user_ids
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "nickname"
+          description: ID пользователя или никнейм
+
+      responses:
+        '200':
+          description: Успешный ответ с данными пользователя
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        is_closed:
+                          type: boolean
+                        can_access_closed:
+                          type: boolean
+              example:
+                response:
+                  - id: 123456789
+                    first_name: "Иван"
+                    last_name: "Иванов"
+                    is_closed: true
+                    can_access_closed: false
+      security:
+        - bearerAuth: []
+        
 components:
   securitySchemes:
     bearerAuth:
