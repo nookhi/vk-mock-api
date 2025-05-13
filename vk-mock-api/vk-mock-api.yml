@@ -68,15 +68,15 @@ paths:
       summary: Получить историю сообщений с пользователя
       parameters:
         - name: peer_id
-        in: query
-        required: true
-        schema:
-          type: integer
+          in: query
+          required: true
+          schema:
+            type: integer
         - name: start_message_id
-        in: query
-        required: true
-        schema:
-          type: integer
+          in: query
+          required: true
+          schema:
+            type: integer
 
       responses:
         '200':
