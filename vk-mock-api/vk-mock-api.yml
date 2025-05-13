@@ -71,13 +71,13 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
           example: "123456789"
           description: Идентификатор собеседника
 
         - name: start_message_id
           in: path
-          required: false
+          required: true
           schema:
             type: integer
           example: 21050
