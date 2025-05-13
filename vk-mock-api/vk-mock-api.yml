@@ -68,20 +68,15 @@ paths:
       summary: Получить историю сообщений с пользователя
       parameters:
         - name: peer_id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: "123456789"
-          description: Идентификатор собеседника
-
-        - name: start_message_id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 21050
-          description: Начальный ID сообщения для выборки
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: start_message_id
+        in: query
+        required: true
+        schema:
+          type: integer
 
       responses:
         '200':
